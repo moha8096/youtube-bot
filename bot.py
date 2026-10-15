@@ -27,7 +27,7 @@ def get_info(url: str) -> dict:
         "yt-dlp",
         "--cookies", COOKIES,
         "--extractor-args", "youtube:player_client=tv_embedded",
-        "--js-runtimes", "nodejs",
+        "--js-runtimes", "deno:/usr/local/bin/deno",
         "--dump-json",
         "--no-playlist",
         url
@@ -66,7 +66,7 @@ def download_merge(url: str, height: int, out_path: str):
         "yt-dlp",
         "--cookies", COOKIES,
         "--extractor-args", "youtube:player_client=tv_embedded",
-        "--js-runtimes", "nodejs",
+        "--js-runtimes", "deno:/usr/local/bin/deno",
         "-f", fmt,
         "--merge-output-format", "mp4",
         "-o", out_path,
