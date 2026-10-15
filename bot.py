@@ -10,7 +10,6 @@ from telegram.ext import Application, MessageHandler, filters, ContextTypes
 TOKEN = os.environ.get("TOKEN")
 COOKIES = "/app/cookies.txt"
 DOWNLOAD_DIR = "/app/downloads"
-DENO = "/root/.deno/bin/deno"
 # ───────────────────────────────
 
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
@@ -28,7 +27,7 @@ def get_info(url: str) -> dict:
         "yt-dlp",
         "--cookies", COOKIES,
         "--extractor-args", "youtube:player_client=tv_embedded",
-        "--js-runtimes", f"deno:{DENO}",
+        "--js-runtimes", "node",
         "--dump-json",
         "--no-playlist",
         url
@@ -67,7 +66,7 @@ def download_merge(url: str, height: int, out_path: str):
         "yt-dlp",
         "--cookies", COOKIES,
         "--extractor-args", "youtube:player_client=tv_embedded",
-        "--js-runtimes", f"deno:{DENO}",
+        "--js-runtimes", "node",
         "-f", fmt,
         "--merge-output-format", "mp4",
         "-o", out_path,
