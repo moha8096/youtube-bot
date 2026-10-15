@@ -26,7 +26,8 @@ def get_info(url: str) -> dict:
     cmd = [
         "yt-dlp",
         "--cookies", COOKIES,
-        "--extractor-args", "youtube:player_client=android,web",
+        "--extractor-args", "youtube:player_client=tv_embedded",
+        "--js-runtimes", "nodejs",
         "--dump-json",
         "--no-playlist",
         url
@@ -64,7 +65,8 @@ def download_merge(url: str, height: int, out_path: str):
     cmd = [
         "yt-dlp",
         "--cookies", COOKIES,
-        "--extractor-args", "youtube:player_client=android,web",
+        "--extractor-args", "youtube:player_client=tv_embedded",
+        "--js-runtimes", "nodejs",
         "-f", fmt,
         "--merge-output-format", "mp4",
         "-o", out_path,
