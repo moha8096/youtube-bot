@@ -189,12 +189,19 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.edit_text(f"❌ خطا:\n`{str(e)[:400]}`", parse_mode='Markdown')
 
 
+async def post_init(application):
+    await application.bot.delete_webhook(drop_pending_updates=True)
+
 def main():
-    app = Application.builder().token(TOKEN).build()
+    app = (
+        Application.builder()
+        .token(TOKEN)
+        .post_init(post_init)
+        .build()
+    )
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
     print("✅ ربات آماده‌ست...")
     app.run_polling(drop_pending_updates=True)
-
 
 if __name__ == '__main__':
     main()
