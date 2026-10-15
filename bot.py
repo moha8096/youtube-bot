@@ -26,7 +26,6 @@ def get_info(url: str) -> dict:
     cmd = [
         "yt-dlp",
         "--cookies", COOKIES,
-        "--extractor-args", "youtube:player_client=web_embedded",
         "--js-runtimes", "deno:/usr/local/bin/deno",
         "--dump-json",
         "--no-playlist",
@@ -65,7 +64,6 @@ def download_merge(url: str, height: int, out_path: str):
     cmd = [
         "yt-dlp",
         "--cookies", COOKIES,
-        "--extractor-args", "youtube:player_client=web_embedded",
         "--js-runtimes", "deno:/usr/local/bin/deno",
         "-f", fmt,
         "--merge-output-format", "mp4",
@@ -76,7 +74,6 @@ def download_merge(url: str, height: int, out_path: str):
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         raise Exception(result.stderr.strip()[-500:])
-
 
 def upload_catbox(file_path: str) -> str:
     with open(file_path, 'rb') as f:
