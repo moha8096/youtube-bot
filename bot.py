@@ -193,7 +193,11 @@ def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
     print("✅ ربات آماده‌ست...")
-    app.run_polling(drop_pending_updates=True)
+    app.run_polling(
+    drop_pending_updates=True,
+    allowed_updates=Update.ALL_TYPES,
+    close_loop=False
+    )
 
 
 if __name__ == '__main__':
